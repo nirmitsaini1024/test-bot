@@ -1,8 +1,31 @@
 import Image from "next/image";
 import Script from "next/script";
+import { headers } from "next/headers";
 import styles from "./page.module.css";
 
-export default function Home() {
+function embedSrcWithLogo(absoluteLogoUrl: string): string {
+  const params = new URLSearchParams({
+    apiKey: "ta-6d9b2f41c8e3a7f0b5d1c4e8a2f9d6b3c7e1a4f8d2b5c9a0",
+    logoUrl: absoluteLogoUrl,
+  });
+  return `https://tau.staging.thinkact.ai/embed-bot?${params.toString()}`;
+}
+
+export default async function Home() {
+  const h = await headers();
+  const host =
+    h.get("x-forwarded-host")?.split(",")[0]?.trim() ??
+    h.get("host") ??
+    "localhost:3000";
+  const forwardedProto = h.get("x-forwarded-proto")?.split(",")[0]?.trim();
+  const proto =
+    forwardedProto ??
+    (host.startsWith("localhost") || host.startsWith("127.0.0.1")
+      ? "http"
+      : "https");
+  const logoAbsoluteUrl = `${proto}://${host}/square-logo.webp`;
+  const iframeSrc = embedSrcWithLogo(logoAbsoluteUrl);
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
@@ -11,7 +34,7 @@ export default function Home() {
 
         <iframe
           id="tami-bot-frame"
-          src="https://tau.staging.thinkact.ai/embed-bot?apiKey=ta-6d9b2f41c8e3a7f0b5d1c4e8a2f9d6b3c7e1a4f8d2b5c9a0"
+          src={iframeSrc}
           title="Mortgage Bot"
           loading="lazy"
           referrerPolicy="strict-origin-when-cross-origin"
