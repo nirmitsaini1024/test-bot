@@ -7,6 +7,8 @@ function embedSrcWithLogo(absoluteLogoUrl: string): string {
   const params = new URLSearchParams({
     apiKey: "ta-6d9b2f41c8e3a7f0b5d1c4e8a2f9d6b3c7e1a4f8d2b5c9a0",
     logoUrl: absoluteLogoUrl,
+    heading: "Angel",
+    subheading: "AI loan assistant — online",
   });
   return `https://tau.staging.thinkact.ai/embed-bot?${params.toString()}`;
 }
@@ -33,9 +35,9 @@ export default async function Home() {
         <p style={{ marginBottom: 24, color: "#555" }}>icon-only iframe test</p>
 
         <iframe
-          id="tami-bot-frame"
+          id="angel-bot-frame"
           src={iframeSrc}
-          title="Mortgage Bot"
+          title="Angel"
           loading="lazy"
           referrerPolicy="strict-origin-when-cross-origin"
           style={{
@@ -55,10 +57,10 @@ export default async function Home() {
           }}
         />
 
-        <Script id="tami-bot-resizer" strategy="afterInteractive">
+        <Script id="angel-bot-resizer" strategy="afterInteractive">
           {`
             (function () {
-              var frame = document.getElementById('tami-bot-frame');
+              var frame = document.getElementById('angel-bot-frame');
               if (!frame) return;
               var OPEN_W = 420;
               var OPEN_H = 700;
