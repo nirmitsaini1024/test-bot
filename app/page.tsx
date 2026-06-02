@@ -5,7 +5,7 @@ import styles from "./page.module.css";
 
 function embedSrcWithLogo(absoluteLogoUrl: string): string {
   const params = new URLSearchParams({
-    apiKey: "ta-6d9b2f41c8e3a7f0b5d1c4e8a2f9d6b3c7e1a4f8d2b5c9a0",
+    apiKey: "ta-152d4491e78ad75eae62efe03735a0abe924d49c54e633c7",
     logoUrl: absoluteLogoUrl,
     heading: "Angel",
     subheading: "AI loan assistant — online",
